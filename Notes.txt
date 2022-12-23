@@ -1,0 +1,38 @@
+Kafka Topic creation
+
+docker exec kafka-broker kafka-topics --bootstrap-server broker:9092 --create --topic quickstart
+docker exec kafka-broker kafka-topics --bootstrap-server broker:9092 --create --topic quickstart
+
+docker exec broker kafka-topics --bootstrap-server broker:9092 --create --partitions 2 --topic quickstart2
+List Kafka Topics
+docker exec broker kafka-topics --bootstrap-server broker:9092 --list
+docker exec kafka1 kafka-topics --bootstrap-server broker:9092 --create --topic quickstart
+
+
+Write message to kafka broker
+docker exec --interactive --tty broker kafka-console-producer --bootstrap-server broker:9092 --topic quickstart2
+
+# Describe kafka topic
+docker exec broker kafka-topics --bootstrap-server broker:9092 --topic quickstart2 --describe
+
+Read messages from the topic
+
+docker exec --interactive --tty broker kafka-console-consumer --bootstrap-server broker:9092 --topic quickstart2 --from-beginning
+Delete topic
+
+docker exec broker kafka-topics --delete --bootstrap-server broker:9092 --topic quickstart
+
+Reference document :
+https://developer.confluent.io/quickstart/kafka-docker/
+https://www.datasciencebytes.com/bytes/2016/04/18/getting-started-with-spark-running-a-simple-spark-job-in-java/
+
+"devices": {"cameras": {"device_id": "awJo6rH...","last_event": {"has_sound": true,"has_motion": true,"has_person": true,"start_time": "2016-12-29T00:00:00.000Z","end_time": "2016-12-29T18:42:00.000Z"}}}
+
+# to build jar
+mvn install
+
+# Spark submit command
+/Users/akshayjain/Desktop/DealShare/installation/spark-3.2.3-bin-hadoop3.2/bin/spark-submit \
+--master "local[*]" \
+--class SparkAppMain \
+target/spark-kafka_v2-1.0-SNAPSHOT.jar
